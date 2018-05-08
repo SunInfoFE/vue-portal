@@ -1,5 +1,5 @@
 <template>
-  <div class="win10-block-tmp tmp1" :style="{backgroundColor: model.backgroundColor}">
+  <div class="win10-block-tmp tmp1" :style="{backgroundColor: model.style.backgroundColor}">
     <img src="../../../assets/logo.png">
     <p>helloworld</p>
   </div>
@@ -25,7 +25,6 @@ export default {
 
 <style scoped>
 .win10-block-tmp.tmp1 img{
-  width: 50%;
   height: 50%;
   margin: 10px
 }

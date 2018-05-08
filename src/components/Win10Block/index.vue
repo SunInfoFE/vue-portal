@@ -1,7 +1,7 @@
 <template>
   <div class="win10-block">
     <grid-layout :layout="layout" :col-num="colnum" :row-height="50" :is-draggable="draggable" :is-resizable="resizable" :is-mirrored="false" :vertical-compact="true" :margin="[10, 10]" :use-css-transforms="true">
-      <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" @resized="resized" @moved="moved">
+      <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :maxW="6" :maxH="3" :key="item.i" @resized="resized" @moved="moved">
         <Tmp1 v-if="item.type === 1" :model="item.model" />
         <Tmp2 v-if="item.type === 2" :model="item.model" />
         <Tmp3 v-if="item.type === 3" :model="item.model" />
@@ -46,7 +46,7 @@ export default {
     layout: {
       type: Array,
       default: [
-        { 'x': 0, 'y': 0, 'w': 2, 'h': 2, i: '1', type: 1, 'model': { backgroundColor: '#ff0000' } },
+        { 'x': 0, 'y': 0, 'w': 2, 'h': 2, i: '1', type: 1, 'model': { style: { backgroundColor: '#ff0000' } } },
         { 'x': 2, 'y': 2, 'w': 2, 'h': 2, i: '2', type: 2, 'model': { backgroundColor: '#ff0000' } },
         { 'x': 4, 'y': 4, 'w': 2, 'h': 2, i: '3', type: 3, 'model': { backgroundColor: '#ff0000' } },
         { 'x': 6, 'y': 6, 'w': 2, 'h': 2, i: '4', type: 4, 'model': { backgroundColor: '#ff0000' } },
