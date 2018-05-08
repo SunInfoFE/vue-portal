@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Win10Block :layout="layout" :draggable="true" :resizable="true"></Win10Block>
+    <Win10Block :layout="layout" :draggable="true" :resizable="true" @setlayout="setlayout"></Win10Block>
   </div>
 </template>
 
@@ -22,6 +22,11 @@ export default {
         { 'x': 14, 'y': 14, 'w': 2, 'h': 2, i: '8', type: 1, 'model': { backgroundColor: '#ff0000' } },
         { 'x': 16, 'y': 16, 'w': 2, 'h': 2, i: '9', type: 1, 'model': { backgroundColor: '#ff0000' } }
       ]
+    }
+  },
+  methods: {
+    setlayout (arr) {
+      this.layout = arr
     }
   },
   components: { Win10Block }
