@@ -1,29 +1,15 @@
 <template>
-  <div class="win10-block-tmp tmp1" :style="{backgroundColor: (model.style.backgroundColor) || '#00000000'}">
-    <img src="../../../assets/logo.png">
+  <div class="win10-block-tmp tmp1" :style="{backgroundColor: (model[0].style.backgroundColor) || '#00000000'}">
+    <img :src="model[0].image">
   </div>
 </template>
 
 <script>
 export default {
   name: 'Tmp1',
-  data() {
-    return {
-    }
-  },
   props: {
     model: {
-      type: Object
-    },
-    index: {
-      type: String,
-      default: ''
-    }
-  },
-  methods: {
-    showMenu(e) {
-      e.preventDefault()
-      this.$emit('showMenu', this.index, e)
+      type: Array
     }
   }
 }

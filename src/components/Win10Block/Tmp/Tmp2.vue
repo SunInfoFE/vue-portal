@@ -1,5 +1,5 @@
 <template>
-  <div class="win10-block-tmp tmp2" :style="{backgroundColor: (model.style.backgroundColor) || '#00000000'}">
+  <div class="win10-block-tmp tmp2" :style="{backgroundColor: (model[0].style.backgroundColor) || '#00000000'}">
     <img src="../../../assets/logo.png">
     <p>helloworld</p>
   </div>
@@ -14,7 +14,7 @@ export default {
   },
   props: {
     model: {
-      type: Object
+      type: Array
     }
   },
   methods: {
@@ -25,8 +25,8 @@ export default {
 <style scoped>
 .win10-block-tmp.tmp2 img{
   position: absolute;
-  width: 50%;
-  height: 50%;
+  width: 40%;
+  height: 40%;
   left: 0;
   right: 0;
   top: 0;
@@ -39,6 +39,7 @@ export default {
   bottom: 5px;
   margin: 0;
   color: #fff;
-  font-size: 12px
+  font-size: 12px;
+  font-weight: 600;
 }
 </style>
