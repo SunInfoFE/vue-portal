@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       loginForm: {
-        userName: '',
+        userName: 'admin',
         userPwd: ''
       }
     };
@@ -33,6 +33,9 @@ export default {
         }
       });
     }
+  },
+  mounted() {
+    this.handleLogin()
   }
 };
 </script>
