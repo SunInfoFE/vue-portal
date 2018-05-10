@@ -1,22 +1,23 @@
 <template>
   <div class="win10-block">
-    <grid-layout :layout="layout" :col-num="colnum" :row-height="50" :is-draggable="draggable" :is-resizable="resizable" :is-mirrored="false" :vertical-compact="true" :margin="[10, 10]" :use-css-transforms="true">
+    <grid-layout :layout="layout" :col-num="colnum" :row-height="50" :is-draggable="draggable" :is-resizable="false" :is-mirrored="false" :vertical-compact="true" :margin="[10, 10]" :use-css-transforms="true">
       <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" @resized="resized" @moved="moved">
-        <Tmp1 v-if="item.type === 1" :model="item.model" />
-        <Tmp2 v-if="item.type === 2" :model="item.model" />
-        <Tmp3 v-if="item.type === 3" :model="item.model" />
-        <Tmp4 v-if="item.type === 4" :model="item.model" />
-        <Tmp5 v-if="item.type === 5" :model="item.model" />
-        <Tmp6 v-if="item.type === 6" :model="item.model" />
-        <Tmp7 v-if="item.type === 7" :model="item.model" />
+        <div :class="['win10-block-container','fade']">
+          <Tmp1 v-if="item.type === 1" :model="item.model" />
+          <Tmp2 v-if="item.type === 2" :model="item.model" />
+          <Tmp3 v-if="item.type === 3" :model="item.model" />
+          <div class="win10-block-tmp-mask" :data-index="item.i" @contextmenu="showMenu" />
+        </div>
       </grid-item>
     </grid-layout>
+    <vue-context-menu :contextMenuData="contextMenuData" @smail="editSize('smail')" @mid="editSize('mid')" @big="editSize('big')" @deleteItem="deleteItem">
+    </vue-context-menu>
   </div>
 </template>
 
 <script>
 /* eslint-disable */
-import { Tmp1, Tmp2, Tmp3, Tmp4, Tmp5, Tmp6, Tmp7 } from './Tmp'
+import { Tmp1, Tmp2, Tmp3 } from './Tmp'
 import { GridLayout, GridItem } from 'vue-grid-layout'
 export default {
   name: 'Win10Block',
@@ -27,7 +28,48 @@ export default {
       totalY: 0,
       prevlayout: [],
       layoutwidth: 0,
-      newlayout: []
+      draggable: true,
+      newlayout: [],
+      isActive: false,
+      contextMenuData: {
+        menuName: 'demo',
+        axios: {
+          x: null,
+          y: null
+        },
+        menulists: [
+          {
+            icoName: 'fa fa-home fa-fw', // icon (icon图标 )
+            btnName: '调整大小', // The name of the menu option (菜单名称)
+            menuName: 'editSize',
+            child: [
+              {
+                fnHandler: 'smail',
+                icoName: 'fa fa-home fa-fw',
+                btnName: '小',
+                menuName: 'smail',
+              },
+              {
+                fnHandler: 'mid',
+                icoName: 'fa fa-home fa-fw',
+                btnName: '中',
+                menuName: 'mid'
+              },
+              {
+                fnHandler: 'big',
+                icoName: 'fa fa-home fa-fw',
+                btnName: '大',
+                menuName: 'big'
+              }
+            ]
+          },
+          {
+            fnHandler: 'deleteItem',
+            icoName: 'fa fa-home fa-fw',
+            btnName: '删除'
+          }
+        ]
+      }
     }
   },
   watch: {
@@ -46,27 +88,13 @@ export default {
     layout: {
       type: Array,
       default: [
-        { 'x': 0, 'y': 0, 'w': 2, 'h': 2, i: '1', type: 1, 'model': { backgroundColor: '#ff0000' } },
-        { 'x': 2, 'y': 2, 'w': 2, 'h': 2, i: '2', type: 2, 'model': { backgroundColor: '#ff0000' } },
-        { 'x': 4, 'y': 4, 'w': 2, 'h': 2, i: '3', type: 3, 'model': { backgroundColor: '#ff0000' } },
-        { 'x': 6, 'y': 6, 'w': 2, 'h': 2, i: '4', type: 4, 'model': { backgroundColor: '#ff0000' } },
-        { 'x': 8, 'y': 8, 'w': 2, 'h': 2, i: '5', type: 5, 'model': { backgroundColor: '#ff0000' } },
-        { 'x': 10, 'y': 10, 'w': 2, 'h': 2, i: '6', type: 6, 'model': { backgroundColor: '#ff0000' } },
-        { 'x': 12, 'y': 12, 'w': 2, 'h': 2, i: '7', type: 7, 'model': { backgroundColor: '#ff0000' } },
-        { 'x': 14, 'y': 14, 'w': 2, 'h': 2, i: '8', type: 1, 'model': { backgroundColor: '#ff0000' } },
-        { 'x': 16, 'y': 16, 'w': 2, 'h': 2, i: '9', type: 1, 'model': { backgroundColor: '#ff0000' } }
+        { 'x': 0, 'y': 0, 'w': 2, 'h': 2, i: '1', type: 1, 'model': { style: { backgroundColor: '#ff0000' } } },
+        { 'x': 2, 'y': 2, 'w': 2, 'h': 2, i: '2', type: 2, 'model': { style: { backgroundColor: '#ff0000' } } },
+        { 'x': 4, 'y': 4, 'w': 2, 'h': 2, i: '3', type: 3, 'model': { style: { backgroundColor: '#ff0000' } } }
       ]
-    },
-    draggable: {
-      type: Boolean,
-      default: false
-    },
-    resizable: {
-      type: Boolean,
-      default: false
     }
   },
-  components: { GridLayout, GridItem, Tmp1, Tmp2, Tmp3, Tmp4, Tmp5, Tmp6, Tmp7 },
+  components: { GridLayout, GridItem, Tmp1, Tmp2, Tmp3 },
   watch: {
     colnum(val) {
       // 写到watch内只监测整型变换，减少监测浮点类型所用开销。
@@ -146,7 +174,7 @@ export default {
           arr.push(item)
         }
       })
-      console.log(arr)
+      this.$emit('setlayout', arr);
     },
     resized(i, x, y, h, w) {
       let arr = []
@@ -162,8 +190,25 @@ export default {
           arr.push(item)
         }
       })
-      console.log(arr)
-    }
+      this.$emit('setlayout', arr);
+    },
+    showMenu(e) {
+      e.preventDefault()
+      let i = e.target.dataset.index;
+      let x = e.clientX
+      let y = e.clientY
+      this.contextMenuData.axios = {
+        x, y
+      }
+      // console.log(e.target.dataset.index, x, y)
+    },
+    editSize() {
+      console.log('editSize')
+    },
+    deleteItem() {
+      console.log('deleteItem!')
+    },
+
   },
   mounted() {
     this.init()
@@ -180,7 +225,35 @@ export default {
   font-weight: normal;
 }
 .win10-block-tmp {
+  position: relative;
   width: 100%;
   height: 100%;
+}
+.win10-block-tmp-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0%;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  background-color: #00000000;
+  z-index: 999;
+}
+.win10-block-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.win10-block-container:active {
+  box-shadow: 0px 5px 20px rgb(151, 148, 148);
+}
+.fade {
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 </style>
