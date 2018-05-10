@@ -3,7 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import VueContextMenu from 'vue-contextmenu'
+import 'vue-contextmenu/style/css/font-awesome.min.css'
+Vue.use(VueContextMenu)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

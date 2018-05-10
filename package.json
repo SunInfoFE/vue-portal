@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "vue": "^2.5.2",
+    "vue-contextmenu": "github:shifeng1993/vue-contextmenu#master",
     "vue-grid-layout": "^2.1.13",
     "vue-router": "^3.0.1"
   },
