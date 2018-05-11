@@ -2,14 +2,13 @@
   <div class="win10-block-tmp tmp3" ref="tmp3">
     <div class="tmp-wrap fade" :style="{'top':`${tmpWrapTop}px`,'height':`${tmpWrapHeight}px`}">
       <div class="tmp-wrap-item" v-for="(item, index) in model" :key="index">
-        <div v-if="index === 0 " class="tmp-wrap-card" :style="{backgroundColor: (item.style.backgroundColor) || '#00000000'}">
-          {{item}}
+        <div v-if="index === 0 " class="tmp-wrap-card" :style="{backgroundColor: (item.backgroundColor) || '#00000000'}">
+          <img class="iconimage" :src="item.image" alt="">
+          <p v-if="item.text.show" :style="{'color':item.text.color}">{{name}}</p>
         </div>
-        <div v-if="index === 1 " class="tmp-wrap-card" :style="{backgroundColor: (item.style.backgroundColor) || '#00000000'}">
-          {{item}}
-        </div>
-        <div v-if="index === 2 " class="tmp-wrap-card" :style="{backgroundColor: (item.style.backgroundColor) || '#00000000'}">
-          {{item}}
+        <div v-if="index === 1 " class="tmp-wrap-card">
+          <img class="fullimage" :src="item.fullImage" alt="">
+          <p v-if="item.text.show" :style="{'color':item.text.color}">{{name}}</p>
         </div>
       </div>
     </div>
@@ -28,27 +27,53 @@ export default {
   props: {
     model: {
       type: Array
+    },
+    name: {
+      type: String,
+      default: ''
     }
   },
   methods: {
-    getTmpWrapHeight () {
+    getTmpWrapHeight() {
       return this.model.length * 110
+    },
+    getRandom() {
+      return Math.floor(Math.random() * 40)
+    },
+    slide() {
+      this.tmpWrapHeight = this.getTmpWrapHeight();
+      if (this.model.length > 1) {
+        let time = 1000
+        for (let i = 0; i < this.model.length - 1; i++) {
+          (() => {
+            time += this.getRandom() * 1000 + 2000
+            setTimeout(() => {
+              this.tmpWrapTop += -110
+            }, time);
+          })()
+        }
+      }
     }
   },
   mounted() {
-    this.tmpWrapHeight = this.getTmpWrapHeight();
-    setTimeout(() => {
-      this.tmpWrapTop = -110
-    }, 2000);
+    this.slide();
   }
 }
 </script>
 
 <style scoped>
-.win10-block-tmp.tmp3 img {
+.win10-block-tmp.tmp3 .iconimage {
   position: absolute;
-  width: 50%;
   height: 50%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.win10-block-tmp.tmp3 .fullimage {
+  position: absolute;
+  height: 100%;
   left: 0;
   right: 0;
   top: 0;
@@ -57,17 +82,11 @@ export default {
 }
 .win10-block-tmp.tmp3 p {
   position: absolute;
-  left: 10px;
-  bottom: 5px;
+  left: 6px;
+  bottom: 3px;
   margin: 0;
   color: #fff;
   font-size: 12px;
   font-weight: 600;
 }
-.tmp-wrap-card {
-  widows: 100%;
-  height: 110px;
-}
-
-
 </style>

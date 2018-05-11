@@ -1,5 +1,5 @@
 <template>
-  <div class="win10-block-tmp tmp1" :style="{backgroundColor: (model[0].style.backgroundColor) || '#00000000'}">
+  <div class="win10-block-tmp tmp1" :style="{backgroundColor: (model[0].backgroundColor) || '#00000000'}">
     <img :src="model[0].image">
   </div>
 </template>

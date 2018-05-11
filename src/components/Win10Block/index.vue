@@ -3,10 +3,10 @@
     <grid-layout :layout="layout" :col-num="colnum" :row-height="50" :is-draggable="draggable" :is-resizable="false" :is-mirrored="false" :vertical-compact="true" :margin="[10, 10]" :use-css-transforms="true">
       <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" @resized="resized" @moved="moved">
         <div :class="['win10-block-container','fade']">
-          <Tmp1 v-if="item.type === 1" :model="item.model" />
-          <Tmp2 v-if="item.type === 2" :model="item.model" />
-          <Tmp3 v-if="item.type === 3" :model="item.model" />
-          <div class="win10-block-tmp-mask" :data-index="item.i" @click="gotopath(item.path)" @contextmenu="showMenu" />
+          <Tmp1 v-if="item.type === 1" :name="item.i" :model="item.model" />
+          <Tmp2 v-if="item.type === 2" :name="item.i" :model="item.model" />
+          <Tmp3 v-if="item.type === 3" :name="item.i" :model="item.model" />
+          <div class="win10-block-tmp-mask" :data-index="item.i" @click="blockClick(item)" @contextmenu="showMenu" />
         </div>
       </grid-item>
     </grid-layout>
@@ -200,16 +200,13 @@ export default {
       this.blockindex = e.target.dataset.index
     },
     editSize(size) {
-      this.$emit('editSize', size)
+      this.$emit('editSize', size, this.blockindex)
     },
     deleteItem() {
       this.$emit('deleteItem', this.blockindex)
     },
-    gotopath(path) {
-      if(!path){
-        return null
-      }
-      this.$router.push(path);
+    blockClick(item) {
+      this.$emit('blockClick', item)
     }
   },
   mounted() {
@@ -239,6 +236,12 @@ export default {
   width: 100%;
   position: absolute;
 }
+.win10-block-tmp .tmp-wrap-card {
+  position: relative;
+  width: 100%;
+  height: 110px;
+}
+
 .win10-block-tmp-mask {
   position: absolute;
   left: 0;

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Win10Block :layout="layout" @setlayout="setlayout" @editSize="editSize" @deleteItem="deleteItem"></Win10Block>
+    <Win10Block :layout="layout" @setlayout="setlayout" @blockClick="blockClick" @editSize="editSize" @deleteItem="deleteItem"></Win10Block>
   </div>
 </template>
 
@@ -11,9 +11,9 @@ export default {
   data() {
     return {
       layout: [
-        { 'x': 0, 'y': 0, 'w': 1, 'h': 1, i: '1', type: 1, path: '/', 'model': [{ style: { backgroundColor: '#ff0000' }, image: require('../assets/logo.png') }, { fullImage: '' }] },
-        { 'x': 2, 'y': 2, 'w': 2, 'h': 2, i: '2', type: 2, 'model': [{ style: { backgroundColor: '#ff0000' } }, { fullImage: '' }] },
-        { 'x': 4, 'y': 4, 'w': 4, 'h': 2, i: '3', type: 3, path: '/', 'model': [{ style: { backgroundColor: '#ff0000' } }, { style: { backgroundColor: '#ffff00' } }, { style: { backgroundColor: 'blue' } }] }
+        { 'x': 0, 'y': 0, 'w': 1, 'h': 1, i: '1', type: 1, 'model': [{ backgroundColor: '#ff0000', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 2, 'y': 2, 'w': 2, 'h': 2, i: '2', type: 2, 'model': [{ backgroundColor: '#ff0000', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 4, 'y': 4, 'w': 4, 'h': 2, i: '3', type: 3, 'model': [{ backgroundColor: '#ff0000', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] }
       ]
     }
   },
@@ -21,11 +21,68 @@ export default {
     setlayout(arr) {
       this.layout = arr
     },
-    editSize(size) {
-      console.log(size)
+    editSize(size, index) {
+      switch (size) {
+        case 'small':
+          let arr1 = [];
+          this.layout.map((item) => {
+            if (item.i === index) {
+              let obj = Object.assign({}, item)
+              obj.w = 1
+              obj.h = 1
+              obj.type = 1
+              arr1.push(obj)
+            } else {
+              arr1.push(item)
+            }
+          })
+          this.setlayout(arr1)
+          break;
+        case 'mid':
+          let arr2 = [];
+          this.layout.map((item) => {
+            if (item.i === index) {
+              let obj = Object.assign({}, item)
+              obj.w = 2
+              obj.h = 2
+              obj.type = 2
+              arr2.push(obj)
+            } else {
+              arr2.push(item)
+            }
+          })
+          this.setlayout(arr2)
+          break;
+        case 'big':
+          let arr3 = [];
+          this.layout.map((item) => {
+            if (item.i === index) {
+              let obj = Object.assign({}, item)
+              obj.w = 4
+              obj.h = 2
+              obj.type = 3
+              arr3.push(obj)
+            } else {
+              arr3.push(item)
+            }
+          })
+          this.setlayout(arr3)
+          break;
+        default:
+          break;
+      }
     },
     deleteItem(index) {
-      console.log(index)
+      let arr = [];
+      this.layout.map((item) => {
+        if (item.i !== index) {
+          arr.push(item)
+        }
+      })
+      this.setlayout(arr)
+    },
+    blockClick(item) {
+      console.log(item)
     }
   },
   components: { Win10Block }
