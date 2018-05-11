@@ -3,14 +3,14 @@
     <grid-layout :layout="layout" :col-num="colnum" :row-height="50" :is-draggable="draggable" :is-resizable="false" :is-mirrored="false" :vertical-compact="true" :margin="[10, 10]" :use-css-transforms="true">
       <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" @resized="resized" @moved="moved">
         <div :class="['win10-block-container','fade']">
-          <Tmp1 v-if="item.type === 1" :model="item.model" />
-          <Tmp2 v-if="item.type === 2" :model="item.model" />
-          <Tmp3 v-if="item.type === 3" :model="item.model" />
-          <div class="win10-block-tmp-mask" :data-index="item.i" @contextmenu="showMenu" />
+          <Tmp1 v-if="item.type === 1" :name="item.i" :model="item.model" />
+          <Tmp2 v-if="item.type === 2" :name="item.i" :model="item.model" />
+          <Tmp3 v-if="item.type === 3" :name="item.i" :model="item.model" />
+          <div class="win10-block-tmp-mask" :data-index="item.i" @click="blockClick(item)" @contextmenu="showMenu" />
         </div>
       </grid-item>
     </grid-layout>
-    <vue-context-menu :contextMenuData="contextMenuData" @smail="editSize('smail')" @mid="editSize('mid')" @big="editSize('big')" @deleteItem="deleteItem">
+    <vue-context-menu :contextMenuData="contextMenuData" @small="editSize('small')" @mid="editSize('mid')" @big="editSize('big')" @deleteItem="deleteItem()">
     </vue-context-menu>
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
   name: 'Win10Block',
   data() {
     return {
+      blockindex: 0,
       colnum: 1,
       timer: false,
       totalY: 0,
@@ -44,10 +45,10 @@ export default {
             menuName: 'editSize',
             child: [
               {
-                fnHandler: 'smail',
+                fnHandler: 'small',
                 icoName: 'fa fa-home fa-fw',
                 btnName: '小',
-                menuName: 'smail',
+                menuName: 'small',
               },
               {
                 fnHandler: 'mid',
@@ -87,11 +88,7 @@ export default {
   props: {
     layout: {
       type: Array,
-      default: [
-        { 'x': 0, 'y': 0, 'w': 2, 'h': 2, i: '1', type: 1, 'model': { style: { backgroundColor: '#ff0000' } } },
-        { 'x': 2, 'y': 2, 'w': 2, 'h': 2, i: '2', type: 2, 'model': { style: { backgroundColor: '#ff0000' } } },
-        { 'x': 4, 'y': 4, 'w': 2, 'h': 2, i: '3', type: 3, 'model': { style: { backgroundColor: '#ff0000' } } }
-      ]
+      default: []
     }
   },
   components: { GridLayout, GridItem, Tmp1, Tmp2, Tmp3 },
@@ -200,15 +197,17 @@ export default {
       this.contextMenuData.axios = {
         x, y
       }
-      // console.log(e.target.dataset.index, x, y)
+      this.blockindex = e.target.dataset.index
     },
-    editSize() {
-      console.log('editSize')
+    editSize(size) {
+      this.$emit('editSize', size, this.blockindex)
     },
     deleteItem() {
-      console.log('deleteItem!')
+      this.$emit('deleteItem', this.blockindex)
     },
-
+    blockClick(item) {
+      this.$emit('blockClick', item)
+    }
   },
   mounted() {
     this.init()
@@ -229,6 +228,20 @@ export default {
   width: 100%;
   height: 100%;
 }
+.win10-block-tmp.tmp2,
+.win10-block-tmp.tmp3 {
+  overflow: hidden;
+}
+.win10-block-tmp .tmp-wrap {
+  width: 100%;
+  position: absolute;
+}
+.win10-block-tmp .tmp-wrap-card {
+  position: relative;
+  width: 100%;
+  height: 110px;
+}
+
 .win10-block-tmp-mask {
   position: absolute;
   left: 0;
@@ -240,6 +253,13 @@ export default {
   height: 100%;
   background-color: #00000000;
   z-index: 999;
+  cursor: pointer;
+}
+.win10-block-tmp-mask:hover {
+  border: 1px solid #fff;
+}
+.win10-block-tmp-mask:active {
+  cursor: move;
 }
 .win10-block-container {
   position: relative;
@@ -249,7 +269,14 @@ export default {
 .win10-block-container:active {
   box-shadow: 0px 5px 20px rgb(151, 148, 148);
 }
-.fade {
+.win10-block-tmp .tmp-wrap.fade {
+  -moz-transition: all 1s cubic-bezier(0.23, -0.01, 0.18, 1.01);
+  -webkit-transition: all 1s cubic-bezier(0.23, -0.01, 0.18, 1.01);
+  -o-transition: all 1s cubic-bezier(0.23, -0.01, 0.18, 1.01);
+  -ms-transition: all 1s cubic-bezier(0.23, -0.01, 0.18, 1.01);
+  transition: all 1s cubic-bezier(0.23, -0.01, 0.18, 1.01);
+}
+.win10-block-container.fade {
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;

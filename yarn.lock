@@ -5882,7 +5882,7 @@ vm-browserify@0.0.4:
 
 "vue-contextmenu@github:shifeng1993/vue-contextmenu#master":
   version "1.4.8"
-  resolved "https://codeload.github.com/shifeng1993/vue-contextmenu/tar.gz/b62ce3ef1f6c372ca2acfc51c1cd0678a079ea3a"
+  resolved "https://codeload.github.com/shifeng1993/vue-contextmenu/tar.gz/897c2dcb3c474782db2db7aae2e0468c83b8e979"
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"

@@ -13,10 +13,10 @@
   "dependencies": {
     "echarts": "^4.1.0",
     "vue": "^2.5.2",
-    "vue-contextmenu": "github:shifeng1993/vue-contextmenu#master",
     "vue-grid-layout": "^2.1.13",
     "vue-router": "^3.0.1",
     "vue-sunflower": "^2.3.1",
+    "vue-contextmenu": "github:shifeng1993/vue-contextmenu#master",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
