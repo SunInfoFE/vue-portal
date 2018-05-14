@@ -1,21 +1,20 @@
 <template>
-  <s-row>
-    <s-col v-for="(size, index) in portlet.size" :key="index" :span="size">
-      <template v-if="portlet.content[index].size">
-        <s-layout :portlet="portlet.content[index]"></s-layout>
-      </template>
-      <template v-else>
-        <component :is="portlet.content[index]"></component>
-      </template>
-    </s-col>
-  </s-row>
+  <div>
+    <s-layout-tree v-for="(portlet, index) in portlets" :key="index" :portlet="portlet"></s-layout-tree>
+  </div>
 </template>
 
 <script>
+import SLayoutTree from './Tree'
 export default {
   name: 'SLayout',
   props: {
-    portlet: Object
+    portlets: Array
+  },
+  components: {
+    SLayoutTree
+  },
+  mounted() {
   }
 };
 </script>
