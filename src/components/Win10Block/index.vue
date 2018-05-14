@@ -10,8 +10,8 @@
         </div>
       </grid-item>
     </grid-layout>
-    <vue-context-menu :contextMenuData="contextMenuData" @small="editSize('small')" @mid="editSize('mid')" @big="editSize('big')" @deleteItem="deleteItem()">
-    </vue-context-menu>
+    <context-menu :contextMenuData="contextMenuData" @small="editSize('small')" @mid="editSize('mid')" @big="editSize('big')" @deleteItem="deleteItem()">
+    </context-menu>
   </div>
 </template>
 
