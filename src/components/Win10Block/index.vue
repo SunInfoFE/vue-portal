@@ -1,7 +1,7 @@
 <template>
   <div class="win10-block">
     <grid-layout :layout="layout" :col-num="colnum" :row-height="50" :is-draggable="draggable" :is-resizable="false" :is-mirrored="false" :vertical-compact="true" :margin="[10, 10]" :use-css-transforms="true">
-      <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" @resized="resized" @moved="moved">
+      <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" @resized="resized" @moved="moved" @move="move">
         <div :class="['win10-block-container','fade']">
           <Tmp1 v-if="item.type === 1" :name="item.i" :model="item.model" />
           <Tmp2 v-if="item.type === 2" :name="item.i" :model="item.model" />
@@ -10,8 +10,8 @@
         </div>
       </grid-item>
     </grid-layout>
-    <vue-context-menu :contextMenuData="contextMenuData" @small="editSize('small')" @mid="editSize('mid')" @big="editSize('big')" @deleteItem="deleteItem()">
-    </vue-context-menu>
+    <context-menu :contextMenuData="contextMenuData" @small="editSize('small')" @mid="editSize('mid')" @big="editSize('big')" @deleteItem="deleteItem()">
+    </context-menu>
   </div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
       draggable: true,
       newlayout: [],
       isActive: false,
+      ismoved:false,
       contextMenuData: {
         menuName: 'demo',
         axios: {
@@ -159,6 +160,9 @@ export default {
         }
       })
     },
+    move() {
+      this.ismoved = true  // 修复点击事件和移动事件重复的bug
+    },
     moved(i, x, y) {
       let arr = []
       this.layout.map(item => {
@@ -172,6 +176,9 @@ export default {
         }
       })
       this.$emit('setlayout', arr);
+      setTimeout(() => {
+        this.ismoved = false // 修复点击事件和移动事件重复的bug
+      }, 200);
     },
     resized(i, x, y, h, w) {
       let arr = []
@@ -206,6 +213,9 @@ export default {
       this.$emit('deleteItem', this.blockindex)
     },
     blockClick(item) {
+      if(this.ismoved) {
+        return
+      }
       this.$emit('blockClick', item)
     }
   },

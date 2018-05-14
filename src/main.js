@@ -8,9 +8,10 @@ import store from './store';
 import 'vue-sunflower/css/sf-dark.css';
 import Portlets from './portlets';
 
-import VueContextMenu from 'vue-contextmenu'
-import 'vue-contextmenu/style/css/font-awesome.min.css'
-Vue.use(VueContextMenu)
+// 以下三行是右键菜单
+import ContextMenu from '@/components/ContextMenu'
+import '@/components/ContextMenu/style/css/font-awesome.min.css'
+Vue.use(ContextMenu);
 
 Vue.use(Sunflower);
 Vue.use(Portlets);

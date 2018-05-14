@@ -5880,10 +5880,6 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-"vue-contextmenu@github:shifeng1993/vue-contextmenu#master":
-  version "1.4.8"
-  resolved "https://codeload.github.com/shifeng1993/vue-contextmenu/tar.gz/897c2dcb3c474782db2db7aae2e0468c83b8e979"
-
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "http://registry.npm.taobao.org/vue-eslint-parser/download/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
