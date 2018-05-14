@@ -5,8 +5,7 @@
          <s-layout-tree v-for="(p, i) in item.children" :key="i" :portlet="p"></s-layout-tree>
       </template>
       <template v-else>
-        <div style=""></div>
-        <p style="color:#000;">{{portlet.height}}</p>
+         <component :is="item.component"></component>
       </template>
     </s-col>
   </s-row>
