@@ -13,6 +13,7 @@
 <script>
 import Win10Block from '@/components/Win10Block/index'
 import SLayout from '@/components/Layout/index';
+import defaultdata from './default.js'
 
 export default {
   name: 'Home',
@@ -20,21 +21,7 @@ export default {
     return {
       showDiyPage: false,
       diypageopacity: 0,
-      layout: [
-        { 'x': 0, 'y': 0, 'w': 2, 'h': 2, i: '1', type: 1, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 2, 'y': 2, 'w': 2, 'h': 2, i: 'dd', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 4, 'y': 2, 'w': 4, 'h': 2, i: 'safafsa', type: 3, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 6, 'y': 2, 'w': 2, 'h': 2, i: '4', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 8, 'y': 2, 'w': 2, 'h': 2, i: '5', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 10, 'y': 2, 'w': 2, 'h': 2, i: '6', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 12, 'y': 2, 'w': 2, 'h': 2, i: '7', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 0, 'y': 4, 'w': 2, 'h': 2, i: '8', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 2, 'y': 4, 'w': 2, 'h': 2, i: '9', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 4, 'y': 4, 'w': 2, 'h': 2, i: '10', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 6, 'y': 4, 'w': 2, 'h': 2, i: '11', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 8, 'y': 4, 'w': 2, 'h': 2, i: '12', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 10, 'y': 4, 'w': 2, 'h': 2, i: '13', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] }
-      ],
+      layout: defaultdata,
       portlets: [{
         height: 360,
         content: [
@@ -110,6 +97,7 @@ export default {
   methods: {
     setlayout(arr) {
       this.layout = arr
+      // window.localStorage.block = JSON.stringify(arr)
     },
     editSize(size, index) {
       switch (size) {
@@ -183,7 +171,34 @@ export default {
       this.diypageopacity = 0
     }
   },
-  components: { Win10Block, SLayout }
+  components: { Win10Block, SLayout },
+  mounted() {
+    // if (window.localStorage.block) {
+    //   this.layout = JSON.parse(window.localStorage.block)
+    // } else {
+      // let arr = []
+      // let x = 0;
+      // let y = 0;
+      // let colors = ['#537fd3', '#ca534b', '#deb63a', '#409755'];
+      // for (let i = 0; i < 50; i++) {
+      //   let type = Math.floor(Math.random() * 3) + 1
+      //   let w = type === 1 ? 1 : (type === 2 ? 2 : 4)
+      //   let h = type === 1 ? 1 : 2
+      //   let maxX = this.colnum = parseInt(window.innerWidth / 60)
+      //   if (x > maxX) {
+      //     x = 0
+      //     y += h
+      //   } else {
+      //     x += w
+      //   }
+
+      //   let color = colors[Math.floor(Math.random() * 4)]
+      //   console.log(x, y, w, h, i)
+      //   arr.push({ 'x': x, 'y': y, 'w': w, 'h': h, i: i.toString(), type: type, 'model': [{ backgroundColor: color, image: '', text: { show: true, color: '#fff' } }, { fullImage: '', text: { show: true, color: '#ff0000' } }] });
+      // }
+      // this.layout = arr
+    // }
+  }
 }
 </script>
 
