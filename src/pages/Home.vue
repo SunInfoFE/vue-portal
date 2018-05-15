@@ -21,9 +21,19 @@ export default {
       showDiyPage: false,
       diypageopacity: 0,
       layout: [
-        { 'x': 0, 'y': 0, 'w': 1, 'h': 1, i: '1', type: 1, 'model': [{ backgroundColor: '#ff0000', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 2, 'y': 2, 'w': 2, 'h': 2, i: '2', type: 2, 'model': [{ backgroundColor: '#ff0000', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
-        { 'x': 4, 'y': 4, 'w': 4, 'h': 2, i: '3', type: 3, 'model': [{ backgroundColor: '#ff0000', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] }
+        { 'x': 0, 'y': 0, 'w': 2, 'h': 2, i: '1', type: 1, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 2, 'y': 2, 'w': 2, 'h': 2, i: 'dd', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 4, 'y': 2, 'w': 4, 'h': 2, i: 'safafsa', type: 3, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 6, 'y': 2, 'w': 2, 'h': 2, i: '4', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 8, 'y': 2, 'w': 2, 'h': 2, i: '5', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 10, 'y': 2, 'w': 2, 'h': 2, i: '6', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 12, 'y': 2, 'w': 2, 'h': 2, i: '7', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 0, 'y': 4, 'w': 2, 'h': 2, i: '8', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 2, 'y': 4, 'w': 2, 'h': 2, i: '9', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 4, 'y': 4, 'w': 2, 'h': 2, i: '10', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 6, 'y': 4, 'w': 2, 'h': 2, i: '11', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 8, 'y': 4, 'w': 2, 'h': 2, i: '12', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] },
+        { 'x': 10, 'y': 4, 'w': 2, 'h': 2, i: '13', type: 2, 'model': [{ backgroundColor: 'blue', image: require('../assets/logo.png'), text: { show: true, color: '#fff' } }, { fullImage: require('../assets/logo.png'), text: { show: true, color: '#ff0000' } }] }
       ],
       portlets: [{
         height: 360,
