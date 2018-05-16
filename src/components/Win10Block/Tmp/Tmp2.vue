@@ -7,7 +7,7 @@
           <p v-if="item.text.show" :style="{'color':item.text.color}">{{name}}</p>
         </div>
         <div v-if="index === 1 " class="tmp-wrap-card">
-          <img class="fullimage" :src="item.fullImage" alt="">
+          <div class="fullimage"><img :src="item.fullImage" alt=""></div>
           <p v-if="item.text.show" :style="{'color':item.text.color}">{{name}}</p>
         </div>
       </div>
@@ -80,7 +80,11 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
+  overflow: hidden;
   margin: auto;
+}
+.win10-block-tmp.tmp2 .fullimage img {
+  height: 100%;
 }
 .win10-block-tmp.tmp2 p {
   position: absolute;
